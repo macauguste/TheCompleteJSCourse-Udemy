@@ -235,3 +235,51 @@ var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20))
 console.log(ages);
 console.log(fullJapan);
 */
+
+//Coding Challenge 7
+/*
+(function() {
+function Question(question, answers, correct) {
+    this.question = question;
+    this.answers = answers;
+    this.correct = correct;
+}
+ 
+Question.prototype.displayQuestion = function(){
+  console.log(this.question);
+
+  for(var i = 0; i < this.answers.length; i++)
+  {
+      console.log(i + ': ' +this.answers[i]);
+  }
+}
+
+Question.prototype.checkAnswer = function(ans){
+  if (ans === this.correct) {
+      console.log('Correct answer!')
+  }else {
+      console.log('Wrong Answer!');
+  }
+}
+
+var q1 = new Question('Is Messi the best player in the world?', ['Yes', 'No'], 0);
+
+var q2 = new Question('Is Lionel Messi the greatest player of all time?', ['Yes', 'No'], 0);
+
+var q3 = new Question('Is Coding something you would like to learn?', ['Yes', 'No'], 0);
+
+var questions = [q1, q2, q3];
+
+var randomQuestion = Math.floor(Math.random() * questions.length);
+
+questions[randomQuestion].displayQuestion();
+
+var answer = parseInt(prompt('Please select the correct answer.'));
+
+questions[randomQuestion].checkAnswer(answer);
+
+})();
+*/
+
+
+

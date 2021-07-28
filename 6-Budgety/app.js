@@ -13,34 +13,46 @@
 ////Controller Module
 //add event handlers
 
+//Budget Controller
 var budgetController = (function () {
 
-     var x = 23;
-
-     var add = function (a) {
-         return x + a;
-     }
-
-     return {
-         publicTest: function(b){
-             return add(b);
-         }
-     }
 
 })();
 
+
+//UI Controller
 var UIController = (function () {
 
 })();
 
+
+//Global App Controller
 var controller = (function (budgetCtrl, UICtrl) {
 
-    var z = budgetCtrl.publicTest(5);
+    //Control additem function
 
-    return {
-        anotherPublic: function(){
-            console.log(z);
-        }
+    var ctrlAddItem = function() 
+    {
+        //1. Get input data from
+    
+        //2. Add item to budget budgetController
+    
+        //3.Add Itme to UIController
+    
+        //4.Calculate Budget 
+
+        //5.Display the Budget on the UI
+
+        console.log('It works');
     }
 
+    document.querySelector('.add__btn').addEventListener('click', ctrlAddItem)
+
+    document.addEventListener('keypress', function(keyEvent){
+        if (keyEvent.keyCode === 13 || keyEvent.which === 13) {
+            ctrlAddItem();
+        }
+    });
+
 })(budgetController, UIController);
+

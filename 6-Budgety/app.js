@@ -20,12 +20,21 @@ var budgetController = (function() {
         this.id = id;
         this.description = description;
         this.value = value;
-    }
+    };
 
     var Income = function(id, description, value){
         this.id = id;
         this.description = description;
         this.value = value;
+    };
+
+    var calculateTotal = function(type){
+        var sum = 0;
+        data.allItems[type].forEach(function(cur){
+            sum = sum + cur.value;
+        });
+        data.totals[type] = sum;
+
     };
 
     var data = {
@@ -36,10 +45,12 @@ var budgetController = (function() {
         totals: {
             exp: 0,
             inc: 0
-        }
+        },
+        budget: 0,
+        percentage: -1,
     };
 
-    return {
+    return { 
         addItem: function(type, des, val) {
             var newItem, ID;
 
@@ -64,9 +75,31 @@ var budgetController = (function() {
             return newItem;
         },
 
+        calculateBudget: function(){
+
+            //calculate total income and expenses
+            calculateTotal('exp');
+            calculateTotal('inc');
+
+            //calculate the budget: income-expense
+            data.budget = data.totals.Income - data.totals.exp;
+
+            //calculate the percentage of the income we spent
+            data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100)
+        },
+
+        getBudget: function(){
+            return{
+                budget: data.budget,
+                totalInc: data.totals.inc,
+                totalExp: data.totals.exp,
+                percentage: data.percentage,
+            }
+        },
+
         testing: function() {
             console.log(data);
-        }
+        },
     };
 
 })();
@@ -152,11 +185,15 @@ var controller = (function(budgetCtrl, UICtrl) {
     };
 
     var updateBudget = function() {
+
         //1. Calculate Budget 
+        budgetCtrl.calculateBudget
 
         //2. Return the budget
+        var budget = budgetCtrl.getBudget();
 
         //3. Display budget in UI
+        console.log(budget);
     }   
 
     var ctrlAddItem = function() {
